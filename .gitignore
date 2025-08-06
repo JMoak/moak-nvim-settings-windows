@@ -1,0 +1,7 @@
+# Only for config repo rooted at nvim/
+# Ignore accidental junk
+*.log
+.cache/
+node_modules/
+plugin/packer_compiled.lua
+
