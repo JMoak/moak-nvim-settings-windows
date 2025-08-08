@@ -28,16 +28,17 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("nvim-tree").setup({
+        hijack_cursor = true,
+        sync_root_with_cwd = true,
+        respect_buf_cwd = true,
         sort_by = "case_sensitive",
-        view = {
-          width = 30,
-        },
-        renderer = {
-          group_empty = true,
-        },
-        filters = {
-          dotfiles = false,
-        },
+        view = { width = 30 },
+        renderer = { group_empty = true },
+        filters = { dotfiles = false },
+        on_attach = function(bufnr)
+          -- prevent accidental gitsigns attach into NvimTree buffer
+          vim.b[bufnr].gitsigns_status = 'skip'
+        end,
       })
       
       -- Keymaps
@@ -100,7 +101,23 @@ return {
       vim.o.timeoutlen = 300
     end,
     config = function()
-      require("which-key").setup()
+      local wk = require("which-key")
+      wk.setup({
+        notify = false,
+        -- Limit triggers to <leader> to avoid operator-family overlap checks
+        triggers = {
+          { "<leader>", mode = "n" },
+          { "<leader>", mode = "v" },
+        },
+      })
+      -- New spec format to label groups
+      wk.add({
+        { "<leader>s", group = "[S]earch" },
+        { "<leader>t", group = "[T]oggle" },
+        { "<leader>g", group = "[G]it" },
+        -- Skip <leader>f group label to avoid overlap warning with ff/fg/etc
+        { "<leader>x", group = "Diagnostics/Trouble" },
+      })
     end
   },
 }

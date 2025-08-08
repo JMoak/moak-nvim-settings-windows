@@ -1,3 +1,16 @@
+# Neovim
+.netrwhist
+Session.vim
+swap/*
+*.swp
+*.swo
+*.un~
+tags
+
+# OS
+.DS_Store
+Thumbs.db
+
 # Only for config repo rooted at nvim/
 # Ignore accidental junk
 *.log

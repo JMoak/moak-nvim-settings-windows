@@ -10,10 +10,12 @@ return {
       },
       -- File browser extension
       "nvim-telescope/telescope-file-browser.nvim",
+      "nvim-telescope/telescope-ui-select.nvim",
     },
     config = function()
       local telescope = require("telescope")
       local actions = require("telescope.actions")
+      local builtin = require('telescope.builtin')
       
       telescope.setup({
         defaults = {
@@ -62,12 +64,14 @@ return {
               },
             },
           },
+          ["ui-select"] = { require('telescope.themes').get_dropdown() },
         },
       })
       
       -- Load extensions
       pcall(telescope.load_extension, "fzf")
       telescope.load_extension("file_browser")
+      pcall(telescope.load_extension, "ui-select")
       
       -- Keymaps
       local keymap = vim.keymap.set
@@ -89,6 +93,11 @@ return {
       keymap("n", "<leader>fr", "<cmd>Telescope resume<CR>", opts)
       -- Find string under cursor 
       keymap("n", "<leader>fw", "<cmd>Telescope grep_string<CR>", opts)
+      -- Extras inspired by Kickstart
+      keymap("n", "<leader>sh", builtin.help_tags, opts)                 -- [S]earch [H]elp
+      keymap("n", "<leader>sd", builtin.diagnostics, opts)                -- [S]earch [D]iagnostics
+      keymap("n", "<leader>s.", builtin.oldfiles, opts)                  -- [S]earch recent files
+      keymap("n", "<leader>sn", function() builtin.find_files({ cwd = vim.fn.stdpath('config') }) end, opts) -- [S]earch [N]eovim files
     end
   }
 }

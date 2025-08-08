@@ -41,6 +41,32 @@ This repo contains only my Neovim **config**. Plugins are managed by **lazy.nvim
   - With a filename: opens that file in a left split.  
   **Requires:** netrw enabled.
 
+## Kickstart as the base
+This config takes inspiration from `kickstart.nvim` (not a full distro) and brings over its best, minimal pieces:
+
+- **lazy.nvim**: Plugin manager with fast startup and lazy-loading.
+- **nvim-treesitter**: Modern syntax highlighting and better code structure.
+- **LSP + mason + lspconfig**: Language servers with easy install/updates.
+- **fidget.nvim**: Small status for LSP progress/initialization.
+- **telescope.nvim (+ ui-select, fzf)**: Project-wide search, files, symbols, etc., with a consistent UI for selections.
+- **conform.nvim**: Format-on-save with LSP fallback; `<leader>f` formats now.
+- **which-key.nvim**: Pop-up hints for keymaps (discoverability) with grouped leader menus.
+- **gitsigns.nvim**: Git hunk signs and quick actions in the gutter.
+- **guess-indent.nvim**: Auto-detect indentation per file.
+
+### Optional goodies added
+- **blink.cmp**: Fast autocompletion engine (replaces nvim-cmp).
+- **lazydev.nvim**: Better Lua LSP experience when editing your Neovim config/plugins.
+- **todo-comments.nvim**: Highlights TODO/FIXME notes; searchable.
+- **mason-tool-installer.nvim**: Ensures external tools like `stylua` are installed.
+
+### Helpful defaults in `init.lua`
+- **Split behavior**: `splitright`, `splitbelow` for predictable windows.
+- **Live substitute**: `inccommand='split'` previews `:%s` changes.
+- **Visualize invisibles**: `list` + `listchars` for cleaner diffs.
+- **Ergonomics**: `scrolloff=10`, `confirm=true`.
+- **Window nav**: `<C-h/j/k/l>` to hop between splits.
+
 ## Repo layout
 ```
 nvim/

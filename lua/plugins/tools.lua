@@ -19,15 +19,27 @@ return {
   -- Git integration
   {
     "lewis6991/gitsigns.nvim",
-    config = function()
-      require("gitsigns").setup()
-    end
+    event = "VeryLazy",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      signs = {
+        add = { text = '+' },
+        change = { text = '~' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '~' },
+      },
+      attach_to_untracked = true,
+      on_attach = function(bufnr)
+        if vim.bo[bufnr].filetype == 'NvimTree' then
+          return false
+        end
+      end,
+    },
   },
   
   -- Git commands
-  {
-    "tpope/vim-fugitive",
-  },
+  { "tpope/vim-fugitive", lazy = false },
   
   -- Surround text objects
   {
@@ -78,5 +90,31 @@ return {
         {silent = true, noremap = true}
       )
     end
+  },
+  {
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    keys = {
+      {
+        "<leader>f",
+        function() require('conform').format({ async = true, lsp_format = 'fallback' }) end,
+        mode = "",
+        desc = "Format buffer",
+      },
+    },
+    opts = {
+      notify_on_error = false,
+      format_on_save = function(bufnr)
+        return { timeout_ms = 500, lsp_format = 'fallback' }
+      end,
+      formatters_by_ft = { lua = { 'stylua' } },
+    },
+  },
+  {
+    "folke/todo-comments.nvim",
+    event = "VimEnter",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = { signs = false },
   },
 }

@@ -17,4 +17,6 @@ return {
   
   -- File icons
   { "nvim-tree/nvim-web-devicons" },
+  
+  { "NMAC427/guess-indent.nvim", opts = {} },
 }
