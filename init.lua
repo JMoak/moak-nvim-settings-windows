@@ -2,6 +2,12 @@
      ╭─────────────────────────────────────────────────────────────────╮
      │  ┌─────────────────────────────────────────────────────────────┐ │
      │  │                                                             │ │
+     │  │  ███╗   ███╗ ██████╗  █████╗ ██╗  ██╗│ │ │ │ │ │ │ │ │ │ │ ││ │
+     │  │  ████╗ ████║██╔═══██╗██╔══██╗██║ ██╔                        │ │
+     │  │  ██╔████╔██║██║   ██║███████║█████╔╝                        │ │ 
+     │  │  ██║╚██╔╝██║██║   ██║██╔══██║██╔═██╗                        │ │    
+     │  │  ██║ ╚═╝ ██║╚██████╔╝██║  ██║██║  ██╗                       │ │   
+     │  │  ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝                       │ │
      │  │                                                             │ │
      │  │  > Terminal online...                                       │ │
      │  │                                                             │ │
@@ -91,6 +97,14 @@ vim.api.nvim_create_user_command('ClaudeCode', function()
   vim.cmd('wincmd L') --throw claudecode to the rightk
   vim.cmd('wincmd h | wincmd h') -- some odd manipulation to activate Vexplore contextual resizing
   vim.cmd('wincmd l | wincmd l | startinsert') -- back to claude for input
+end, {})
+
+-- Create a custom command for Codex side-by-side
+vim.api.nvim_create_user_command('Codex', function()
+  vim.cmd('Vexplore | rightbelow vsplit | term codex')
+  vim.cmd('wincmd L') --throw codex to the right
+  vim.cmd('wincmd h | wincmd h') -- some odd manipulation to activate Vexplore contextual resizing
+  vim.cmd('wincmd l | wincmd l | startinsert') -- back to codex for input
 end, {})
 
 -- Custom command: open a file (or Explorer) in the left split
