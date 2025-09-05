@@ -135,7 +135,7 @@ return {
       keymap = { preset = 'default' },
       appearance = { nerd_font_variant = 'mono' },
       completion = { documentation = { auto_show = false, auto_show_delay_ms = 500 } },
-      sources = { default = { 'lsp', 'path', 'snippets', 'lazydev' } },
+      sources = { default = { 'lsp', 'path', 'snippets' } },
       snippets = { preset = 'luasnip' },
       signature = { enabled = true },
       fuzzy = { implementation = 'lua' },
