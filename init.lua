@@ -76,6 +76,9 @@ vim.opt.shellslash = false      -- Use forward slashes on Windows
 -- Terminal mode: <Esc> leaves terminal-mode (sends <C-\\><C-n>)
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { noremap = true })
 
+-- Send literal Esc to terminal process while in terminal mode
+vim.keymap.set('t', '<S-Tab>', '<Esc>', { desc = 'Send Esc to terminal' })
+
 -- Normal mode: <Esc> clears incremental search highlights
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { noremap = true })
 
